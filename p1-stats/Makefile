@@ -1,5 +1,5 @@
-CXX ?= g++
-CXXFLAGS ?= -Wall -Werror -pedantic -g --std=c++17 -Wno-sign-compare -Wno-comment
+CXX ?= g++ #compiler (varibale CXX)
+CXXFLAGS ?= -Wall -Werror -pedantic -g --std=c++17 -Wno-sign-compare -Wno-comment #compiler arguments (variable CXXFLAGS)
 
 # Run a regression test
 test: stats_public_tests.exe stats_tests.exe two_sample.exe

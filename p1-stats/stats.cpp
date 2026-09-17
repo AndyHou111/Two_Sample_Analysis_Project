@@ -84,8 +84,6 @@ double stdev(std::vector<double> v){
         sum += (v[i]-m)*(v[i]-m)/(c-1);
    }
    return sqrt(sum);
-
-
 };
 
 //REQUIRES: v is not empty
