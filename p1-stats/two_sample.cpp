@@ -22,8 +22,21 @@ using namespace std;
 //REQUIRES: data contains at least 2 elements
 //EFFECTS: Prints descriptive statistics for the given data
 void print_descriptive_stats(vector<double> data) {
-  // TODO: Implement this function, removing the assert(false); placeholder.
-  assert(false);
+  assert(data.size() >= 2);
+
+  cout << "count = " << count(data) << endl;
+  cout << "sum = " << sum(data) << endl;
+  cout << "mean = " << mean(data) << endl;
+  cout << "stdev = " << stdev(data) << endl;
+  cout << "median = " << median(data) << endl;
+  cout << "min = " << min(data) << endl;
+  cout << "max = " << max(data) << endl;
+  cout << "  0th percentile = " << percentile(data , 0) << endl;
+  cout << " 25th percentile = " << percentile(data , 0.25) << endl;
+  cout << " 50th percentile = " << percentile(data , 0.5) << endl;
+  cout << " 75th percentile = " << percentile(data , 0.75) << endl;
+  cout << "100th percentile = " << percentile(data , 1) << endl;
+
 }
 
 //REQUIRES: Nothing
@@ -33,16 +46,24 @@ void print_descriptive_stats(vector<double> data) {
 //          resamples of original samples data_A and data_B.
 vector<double> mean_diff_sampling_distribution(
   vector<double> data_A, vector<double> data_B) {
-  // TODO: Implement this function, removing the assert(false); placeholder.
+    // TODO: Implement this function, removing the assert(false); placeholder.
 
-  // HINT: Repeat the following 1000 times:
-  //   1. Generate bootstrap resamples for data_A and data_B by
-  //      calling the bootstrap_resample() function from the library module.
-  //      Make sure to pass in the iteration number as the sample_num.
-  //   2. Compute the difference in means between the resamples
-  //   3. Add the computed value to a vector
+    // HINT: Repeat the following 1000 times:
+    //   1. Generate bootstrap resamples for data_A and data_B by
+    //      calling the bootstrap_resample() function from the library module.
+    //      Make sure to pass in the iteration number as the sample_num.
+    //   2. Compute the difference in means between the resamples
+    //   3. Add the computed value to a vector
+    
+    vector<double> ans;
+    for (int i = 0; i < 1000; ++i){
+      vector<double> new_data_A = bootstrap_resample(data_A, i);
+      vector<double> new_data_B = bootstrap_resample(data_B, i);
+      double mean_diff = mean(new_data_A) - mean(new_data_B);
+      ans.push_back(mean_diff);
+    }
+    return ans;
   
-  assert(false);
 }
 
 //REQUIRES: v is not empty
@@ -52,6 +73,8 @@ vector<double> mean_diff_sampling_distribution(
 //          as a pair of upper and lower bounds. For example, the bounds on a
 //          confidence interval with width 0.8 are the 10th and 90th percentiles.
 pair<double, double> confidence_interval(vector<double> v, double width) {
+
+  assert((v.size() != 0) && (0 <= width) && (width <= 1));
   // TODO: Implement this function, removing the assert(false); placeholder.
   
   // HINT: Use the percentile function as a helper
@@ -59,8 +82,13 @@ pair<double, double> confidence_interval(vector<double> v, double width) {
 
   // HINT: You can return a pair like this:
   //   return {lower, upper};
-  
-  assert(false);
+
+  double low_perentile = 0.5 - (width/2);
+  double up_percentile = 0.5 + (width/2);
+  double lower = percentile(v, low_perentile);
+  double upper = percentile(v, up_percentile);
+  return {lower, upper}; 
+
 }
 
 void two_sample_analysis(string file_name, string filter_column_name,
