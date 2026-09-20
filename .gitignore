@@ -1,8 +1,2 @@
-.vscode/
-Lecture/
-project1/
-starter-files/
-eecs280notes.pdf
-test
-test.cpp
-.DS_Store
+*
+!p1-stats

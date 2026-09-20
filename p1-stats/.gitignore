@@ -1,0 +1,9 @@
+*
+!.gitignore
+!stats.cpp
+!stats.hpp
+!stats_tests.cpp
+!Makefile
+!two_sample.cpp
+!library.hpp
+!README.md
